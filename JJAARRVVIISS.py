@@ -1,15 +1,16 @@
-import speech_recognition as sr
-import datetime
-import wikipedia
-import pyaudio
-import time
-import webbrowser
+import speech_recognition as sr # pip install SpeechRecognition
+import datetime # pip install DateTime
+import wikipedia # pip install wikipedia
+import pyaudio # pip install pyaudio
+import time # pip install time
+import webbrowser # pip install webbrowser
 import pyautogui # pip install pyautogui
 from PIL import Image, ImageGrab # pip install pillow
+from win32com.client import Dispatch #pip install pywin32
 
 hour = int(datetime.datetime.now().hour)
 def speak(str):
-    from win32com.client import Dispatch
+    
     speak = Dispatch("SAPI.SpVoice")
     speak.Speak(str)
 
@@ -63,22 +64,29 @@ def takeCommand():
     return query   
 
 if __name__ == "__main__":
-    
+    # Main Section
     speak("This programme is under development enter Yes to continue No to exit")
     print("This programme is under development enter Yes to continue No to exit")
     yesno = input("Enter Yes to continue, No to exit :::  ")
     lo = yesno.lower()
     if lo == "yes":
-        query = takeCommand().lower()
+#         query = takeCommand().lower()
 
         speak("Please tell whether you are male or female ")
         print("Please tell whether you are male or female ")
         mf = input("Enter Male if you are male, or enter Female if you are female")
         lmf = mf.lower()
-        speak("Ok thanks for telling me ")
-        speak("Starting Jarvis ")
+#         speak("Ok thanks for telling me ")//If you want then uncomment this line. This is your choice.
         if lmf == "male":
-            wishMe()
+            speak("What may I call you ?")
+            print("What may I call you ?")
+            name = input("Enter your name here ::: ")
+            speak("Fine, I'll call you", name, " from now onwards ")
+            print("Fine, I'll call you", name, " from now onwards ")
+
+            speak("Starting Jarvis ")
+
+            wishMeSir()
             while True:
                 query = takeCommand().lower()
 
@@ -93,9 +101,7 @@ if __name__ == "__main__":
                     print(results)
                     speak(results)
 
-                elif 'nikita' in query:
-                    print("Hello Ma'am, If I'm not wrong then you're sir's sister Nikita ?")
-                    speak("Hello Ma'am, If I'm not wrong then you're sir's sister Nikita ?")                    
+                
                 elif 'google' in query:
                     speak('opening google')
                     webbrowser.open('google.com')
@@ -105,6 +111,9 @@ if __name__ == "__main__":
                 elif 'whatsapp' in query:
                     speak('opening whatsapp')
                     webbrowser.open('whatsapp.com')
+                elif 'me' in query:
+                    speak("You are Mr.", name)
+                    print("You are Mr.", name)
                 elif 'jarvis' in query:
                     speak("Yes Sir , How may I help you ?")
                     print("Yes Sir , How may I help you ?")
@@ -128,6 +137,16 @@ if __name__ == "__main__":
                         speak("Bye sir and have a nice sleep")
                     break
         elif lmf == "female":
+            speak("What may I call you ?")
+            print("What may I call you ?")
+            name = input("Enter your name here ::: ")
+            speak("Fine, I'll call you", name, " from now onwards ")
+            print("Fine, I'll call you", name, " from now onwards ")
+
+
+            speak("Starting Jarvis ")
+
+            
             wishMeMaam()
             while True:
                 query = takeCommand().lower()
@@ -143,9 +162,7 @@ if __name__ == "__main__":
                     print(results)
                     speak(results)
 
-#                 elif 'nikita' in query:
-#                     print("Hello Ma'am, If I'm not wrong then you're sir's sister Nikita ?")
-#                     speak("Hello Ma'am, If I'm not wrong then you're sir's sister Nikita ?")                    
+                   
                 elif 'google' in query:
                     speak('opening google')
                     webbrowser.open('google.com')
@@ -155,6 +172,9 @@ if __name__ == "__main__":
                 elif 'whatsapp' in query:
                     speak('opening whatsapp')
                     webbrowser.open('whatsapp.com')
+                elif 'me' in query:
+                    speak("You are Mr.", name)
+                    print("You are Mr.", name)
                 elif 'jarvis' in query:
                     speak("Yes Ma'am , How may I help you ?")
                     print("Yes Ma'am , How may I help you ?")
@@ -177,11 +197,15 @@ if __name__ == "__main__":
                         print("Bye Ma'am and have a nice sleep")
                         speak("Bye Ma'am and have a nice sleep")
                     break
+            else:
+                speak("Invalid input !!!!!")
+                print("Invalid input !!!!!")  
+                
     elif lo == "no":
         speak("Exiting the programme")
-        print("Invalid input !!!!!")            
+        print("Exiting the programme")            
 #         break
     else:
         
         speak("Invalid input !!!!!")
-        print("Invalid input !!!!!")            
+        print("Invalid input !!!!!")                        
